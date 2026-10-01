@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:wc_2026_mobile/ui/core/theme/app_theme.dart';
 
 void main() {
   runApp(MainApp());
@@ -9,9 +10,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Hello World'))),
+      theme: AppTheme.light,
+      home: Scaffold(
+        body: Center(
+          child: FilledButton(
+            onPressed: () {},
+            child: const Text('Hello World'),
+          ),
+        ),
+      ),
     );
   }
 }
