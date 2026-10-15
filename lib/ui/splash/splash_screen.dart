@@ -8,8 +8,43 @@ import 'package:wc_2026_mobile/ui/core/shared/logo_card.dart';
 import 'package:wc_2026_mobile/ui/core/theme/theme.dart';
 import 'package:wc_2026_mobile/ui/splash/widgets/boot_bar.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  // late: make the initialization of the variable lazy, so it will be initialized only when it is used for the first time
+  late final _boot = AnimationController(
+    vsync: this,
+    duration: Duration(milliseconds: 2400),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _boot.forward().then((_) => _exitWhenReady());
+  }
+
+  @override
+  void dispose() {
+    _boot.dispose();
+    super.dispose();
+  }
+
+  void _exitWhenReady() {
+    if (!mounted || !_boot.isCompleted) return;
+
+    // TODO: Call the redirect
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Redirect to the next screen'),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +108,12 @@ class SplashScreen extends StatelessWidget {
                       ),
                       child: SizedBox(
                         height: 72,
-                        child: BootBar(progress: 0.5),
+                        child: AnimatedBuilder(
+                          animation: _boot,
+                          builder: (_, _) {
+                            return BootBar(progress: _boot.value);
+                          },
+                        ),
                       ),
                     ),
                   ],
