@@ -1,5 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:wc_2026_mobile/routing/routes.dart';
 
 import 'package:wc_2026_mobile/ui/core/shared/app_assets.dart';
 import 'package:wc_2026_mobile/ui/core/shared/licensed_badge.dart';
@@ -38,12 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
   void _exitWhenReady() {
     if (!mounted || !_boot.isCompleted) return;
 
-    // TODO: Call the redirect
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Redirect to the next screen'),
-      ),
-    );
+    context.go(Routes.welcome);
   }
 
   @override
