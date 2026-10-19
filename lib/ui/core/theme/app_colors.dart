@@ -11,7 +11,9 @@ final class AppColors._() {
 
   static const gray100 = Color(0xFFADADB8);
   static const gray500 = Color(0xFF7A7A85);
-  static const gray600 = Color(0xFF80808C);
+  static const gray600 = Color(
+    0xFF80808C,
+  ); // equivalent to grayText from video class
   static const gray700 = Color(0xFF42424D);
 
   static const red500 = Color(0xFFC82426);

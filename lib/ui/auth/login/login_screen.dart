@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
               required: true,
               keyboardType: TextInputType.emailAddress,
             ),
-            LabeledField(
+            LabeledField.password(
               label: 'Senha',
               hintText: '********',
               required: true,
