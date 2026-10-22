@@ -1,5 +1,9 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:wc_2026_mobile/ui/core/shared/labeled_field.dart';
+import 'package:wc_2026_mobile/ui/auth/login/widgets/emblem.dart';
+import 'package:wc_2026_mobile/ui/auth/login/widgets/header.dart';
+import 'package:wc_2026_mobile/ui/auth/login/widgets/login_form.dart';
+import 'package:wc_2026_mobile/ui/core/theme/app_text_styles.dart';
+import 'package:wc_2026_mobile/ui/core/theme/theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,30 +16,50 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 16,
-          children: [
-            LabeledField(
-              label: 'Nome',
-              hintText: 'John Doe',
+      body: Stack(
+        children: [
+          Header(),
+
+          // CONTENT
+          SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // EXPANDED CONTENT
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: 20),
+                    Emblem(),
+                    SizedBox(height: 26),
+                    Text(
+                      'FIFA WORLD CUP 26™',
+                      style: AppTextStyles.overline,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 36),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimensions.paddingHorizontal,
+                      ),
+                      child: LoginForm(),
+                    ),
+                  ],
+                ),
+
+                // FOOTER
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColors.ink,
+                    textStyle: AppTextStyles.bodyBold,
+                  ),
+                  child: Text("Não tem conta?  Criar conta →"),
+                ),
+              ],
             ),
-            LabeledField(
-              label: 'Email',
-              hintText: 'voce@example.com',
-              required: true,
-              keyboardType: TextInputType.emailAddress,
-            ),
-            LabeledField.password(
-              label: 'Senha',
-              hintText: '********',
-              required: true,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
